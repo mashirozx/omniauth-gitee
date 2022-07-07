@@ -1,27 +1,12 @@
 require 'spec_helper'
 
-describe OmniAuth::Strategies::GitHub do
+describe OmniAuth::Strategies::Gitee do
   let(:access_token) { instance_double('AccessToken', :options => {}, :[] => 'user') }
   let(:parsed_response) { instance_double('ParsedResponse') }
   let(:response) { instance_double('Response', :parsed => parsed_response) }
 
-  let(:enterprise_site)          { 'https://some.other.site.com/api/v3' }
-  let(:enterprise_authorize_url) { 'https://some.other.site.com/login/oauth/authorize' }
-  let(:enterprise_token_url)     { 'https://some.other.site.com/login/oauth/access_token' }
-  let(:enterprise) do
-    OmniAuth::Strategies::GitHub.new('GITHUB_KEY', 'GITHUB_SECRET',
-        {
-            :client_options => {
-                :site => enterprise_site,
-                :authorize_url => enterprise_authorize_url,
-                :token_url => enterprise_token_url
-            }
-        }
-    )
-  end
-
   subject do
-    OmniAuth::Strategies::GitHub.new({})
+    OmniAuth::Strategies::Gitee.new({})
   end
 
   before(:each) do
@@ -30,29 +15,15 @@ describe OmniAuth::Strategies::GitHub do
 
   context 'client options' do
     it 'should have correct site' do
-      expect(subject.options.client_options.site).to eq('https://api.github.com')
+      expect(subject.options.client_options.site).to eq('https://gitee.com')
     end
 
     it 'should have correct authorize url' do
-      expect(subject.options.client_options.authorize_url).to eq('https://github.com/login/oauth/authorize')
+      expect(subject.options.client_options.authorize_url).to eq('https://gitee.com/oauth/authorize')
     end
 
     it 'should have correct token url' do
-      expect(subject.options.client_options.token_url).to eq('https://github.com/login/oauth/access_token')
-    end
-
-    describe 'should be overrideable' do
-      it 'for site' do
-        expect(enterprise.options.client_options.site).to eq(enterprise_site)
-      end
-
-      it 'for authorize url' do
-        expect(enterprise.options.client_options.authorize_url).to eq(enterprise_authorize_url)
-      end
-
-      it 'for token url' do
-        expect(enterprise.options.client_options.token_url).to eq(enterprise_token_url)
-      end
+      expect(subject.options.client_options.token_url).to eq('https://gitee.com/oauth/token')
     end
   end
 
@@ -177,7 +148,7 @@ describe OmniAuth::Strategies::GitHub do
       allow(subject).to receive(:full_host).and_return('https://example.com')
       allow(subject).to receive(:script_name).and_return('/sub_uri')
 
-      expect(subject.callback_url).to eq('https://example.com/sub_uri/auth/github/callback')
+      expect(subject.callback_url).to eq('https://example.com/sub_uri/auth/gitee/callback')
     end
   end
 end

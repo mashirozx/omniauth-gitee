@@ -2,11 +2,11 @@ require 'omniauth-oauth2'
 
 module OmniAuth
   module Strategies
-    class GitHub < OmniAuth::Strategies::OAuth2
+    class Gitee < OmniAuth::Strategies::OAuth2
       option :client_options, {
-        :site => 'https://api.github.com',
-        :authorize_url => 'https://github.com/login/oauth/authorize',
-        :token_url => 'https://github.com/login/oauth/access_token'
+        :site => 'https://gitee.com',
+        :authorize_url => 'https://gitee.com/oauth/authorize',
+        :token_url => 'https://gitee.com/oauth/token'
       }
 
       def request_phase
@@ -81,4 +81,4 @@ module OmniAuth
   end
 end
 
-OmniAuth.config.add_camelization 'github', 'GitHub'
+OmniAuth.config.add_camelization 'gitee', 'Gitee'

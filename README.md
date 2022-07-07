@@ -1,3 +1,11 @@
+# OmniAuth Gitee (码云)
+
+Forked from [omniauth-github](https://github.com/omniauth/omniauth-github)
+
+TODO: Readme
+
+***
+
 ![Ruby](https://github.com/omniauth/omniauth-github/workflows/Ruby/badge.svg?branch=master)
 
 # OmniAuth GitHub
@@ -9,7 +17,7 @@ on the [GitHub Applications Page](https://github.com/settings/applications).
 ## Installation
 
 ```ruby
-gem 'omniauth-github', github: 'omniauth/omniauth-github', branch: 'master'
+gem 'omniauth-gitee', github: 'omniauth/omniauth-gitee', branch: 'master'
 ```
 
 ## Basic Usage
