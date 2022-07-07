@@ -1,78 +1,62 @@
+![Ruby](https://github.com/omniauth/omniauth-gitee/workflows/Ruby/badge.svg?branch=master)
+
 # OmniAuth Gitee (码云)
 
-Forked from [omniauth-github](https://github.com/omniauth/omniauth-github)
+码云 OmniAuth 策略。
 
-TODO: Readme
-
-***
-
-![Ruby](https://github.com/omniauth/omniauth-github/workflows/Ruby/badge.svg?branch=master)
-
-# OmniAuth GitHub
-
-This is the official OmniAuth strategy for authenticating to GitHub. To
+This is the OmniAuth strategy for authenticating to Gitee. To
 use it, you'll need to sign up for an OAuth2 Application ID and Secret
-on the [GitHub Applications Page](https://github.com/settings/applications).
+on the [Gitee Applications Page](https://gitee.com/oauth/applications).
+
+Forked and modified from [omniauth-github](https://github.com/omniauth/omniauth-github)
 
 ## Installation
 
 ```ruby
-gem 'omniauth-gitee', github: 'omniauth/omniauth-gitee', branch: 'master'
+gem 'omniauth-gitee', github: 'mashirozx/omniauth-gitee', branch: 'master'
+# or
+gem 'omniauth-gitee', '~> 1.0.0'
 ```
 
 ## Basic Usage
 
 ```ruby
 use OmniAuth::Builder do
-  provider :github, ENV['GITHUB_KEY'], ENV['GITHUB_SECRET']
+  provider :github, ENV['GITEE_KEY'], ENV['GITEE_SECRET']
 end
 ```
 
 
 ## Basic Usage Rails
 
-In `config/initializers/github.rb`
+In `config/initializers/gitee.rb`
 
 ```ruby
   Rails.application.config.middleware.use OmniAuth::Builder do
-    provider :github, ENV['GITHUB_KEY'], ENV['GITHUB_SECRET']
+    provider :github, ENV['GITEE_KEY'], ENV['GITEE_SECRET']
   end
-```
-
-
-## Github Enterprise Usage
-
-```ruby
-provider :github, ENV['GITHUB_KEY'], ENV['GITHUB_SECRET'],
-    {
-      :client_options => {
-        :site => 'https://github.YOURDOMAIN.com/api/v3',
-        :authorize_url => 'https://github.YOURDOMAIN.com/login/oauth/authorize',
-        :token_url => 'https://github.YOURDOMAIN.com/login/oauth/access_token',
-      }
-    }
 ```
 
 ## Scopes
 
-GitHub API v3 lets you set scopes to provide granular access to different types of data: 
+Gitee API v5 lets you set scopes to provide granular access to different types of data: 
 
 ```ruby
 use OmniAuth::Builder do
-  provider :github, ENV['GITHUB_KEY'], ENV['GITHUB_SECRET'], scope: "user,repo,gist"
+  provider :github, ENV['GITEE_KEY'], ENV['GITEE_SECRET'], scope: "user_info emails"
 end
 ```
 
-More info on [Scopes](https://docs.github.com/en/developers/apps/scopes-for-oauth-apps).
+More info on [docs](https://gitee.com/api/v5/oauth_doc#/).
 
 
 ## Semver
-This project adheres to Semantic Versioning 2.0.0. Any violations of this scheme are considered to be bugs. 
-All changes will be tracked [here](https://github.com/omniauth/omniauth-github/releases).
+This project adheres to Semantic Versioning 1.0.0. Any violations of this scheme are considered to be bugs. 
+All changes will be tracked [here](https://github.com/mashirozx/omniauth-gitee/releases).
 
 ## License
 
-Copyright (c) 2011 Michael Bleigh and Intridea, Inc.
+Copyright (c) 2022 Mashiro (github.com/mashirozx). All rights reserved.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
