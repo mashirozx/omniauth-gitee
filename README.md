@@ -22,7 +22,7 @@ gem 'omniauth-gitee', '~> 1.0.0'
 
 ```ruby
 use OmniAuth::Builder do
-  provider :github, ENV['GITEE_KEY'], ENV['GITEE_SECRET']
+  provider :gitee, ENV['GITEE_KEY'], ENV['GITEE_SECRET']
 end
 ```
 
@@ -33,7 +33,7 @@ In `config/initializers/gitee.rb`
 
 ```ruby
   Rails.application.config.middleware.use OmniAuth::Builder do
-    provider :github, ENV['GITEE_KEY'], ENV['GITEE_SECRET']
+    provider :gitee, ENV['GITEE_KEY'], ENV['GITEE_SECRET']
   end
 ```
 
@@ -43,7 +43,7 @@ Gitee API v5 lets you set scopes to provide granular access to different types o
 
 ```ruby
 use OmniAuth::Builder do
-  provider :github, ENV['GITEE_KEY'], ENV['GITEE_SECRET'], scope: "user_info emails"
+  provider :gitee, ENV['GITEE_KEY'], ENV['GITEE_SECRET'], scope: "user_info emails"
 end
 ```
 
