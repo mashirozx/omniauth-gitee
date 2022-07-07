@@ -39,7 +39,7 @@ describe OmniAuth::Strategies::Gitee do
     end
 
     it 'should allow email if scope is a bunch of stuff including user_info' do
-      subject.options['scope'] = 'public_repo,user_info,repo,delete_repo,gist'
+      subject.options['scope'] = 'public_repo user_info repo delete_repo gist'
       expect(subject).to be_email_access_allowed
     end
 
