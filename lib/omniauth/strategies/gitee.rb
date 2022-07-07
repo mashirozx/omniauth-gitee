@@ -4,7 +4,7 @@ module OmniAuth
   module Strategies
     class Gitee < OmniAuth::Strategies::OAuth2
       option :client_options, {
-        :site => 'https://gitee.com',
+        :site => 'https://gitee.com/api/v5/',
         :authorize_url => 'https://gitee.com/oauth/authorize',
         :token_url => 'https://gitee.com/oauth/token'
       }
@@ -32,8 +32,9 @@ module OmniAuth
           'name' => raw_info['name'],
           'image' => raw_info['avatar_url'],
           'urls' => {
-            'GitHub' => raw_info['html_url'],
+            'Gitee' => raw_info['html_url'],
             'Blog' => raw_info['blog'],
+            'Weibo' => raw_info['weibo'],
           },
         }
       end
@@ -56,7 +57,7 @@ module OmniAuth
       end
 
       def primary_email
-        primary = emails.find{ |i| i['primary'] && i['verified'] }
+        primary = emails.find{ |i| (i['scope'].include? 'primary') && i['state'] == 'confirmed' }
         primary && primary['email'] || nil
       end
 
@@ -64,13 +65,13 @@ module OmniAuth
       def emails
         return [] unless email_access_allowed?
         access_token.options[:mode] = :header
-        @emails ||= access_token.get('user/emails', :headers => { 'Accept' => 'application/vnd.github.v3' }).parsed
+        @emails ||= access_token.get('emails').parsed
       end
 
       def email_access_allowed?
         return false unless options['scope']
-        email_scopes = ['user', 'user:email']
-        scopes = options['scope'].split(',')
+        email_scopes = %w[user_info emails]
+        scopes = options['scope'].split(' ')
         (scopes & email_scopes).any?
       end
 
