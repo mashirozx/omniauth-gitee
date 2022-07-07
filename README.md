@@ -1,4 +1,4 @@
-![Ruby](https://github.com/omniauth/omniauth-gitee/workflows/Ruby/badge.svg?branch=master)
+![Ruby](https://github.com/mashirozx/omniauth-gitee/workflows/Ruby/badge.svg?branch=master)
 
 # OmniAuth Gitee (码云)
 
